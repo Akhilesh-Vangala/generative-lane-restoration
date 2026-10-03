@@ -1,5 +1,3 @@
-**Authors:** Sai Akhilesh Vangala ([Akhilesh-Vangala](https://github.com/Akhilesh-Vangala)) and Venkatashivasai Muppidi ([vssmuppidi](https://github.com/vssmuppidi)). Collaborative project.
-
 # Road Lane Overlay: Generative Restoration of Lane Markings in Dashcam Footage
 
 A deep learning pipeline for detecting and restoring road lane markings in dashcam footage using CLRerNet for lane detection and a fine-tuned Qwen Image Edit model for realistic lane restoration.

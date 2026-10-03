@@ -1,0 +1,121 @@
+job: extension
+config:
+  name: qwen_5
+  process:
+  - type: diffusion_trainer
+    training_folder: /workspace/ai-toolkit/output
+    sqlite_db_path: /workspace/ai-toolkit/aitk_db.db
+    device: cuda
+    trigger_word: null
+    performance_log_every: 10
+    network:
+      type: lora
+      linear: 16
+      linear_alpha: 16
+      conv: 16
+      conv_alpha: 16
+      lokr_full_rank: true
+      lokr_factor: -1
+      network_kwargs:
+        ignore_if_contains: []
+    save:
+      dtype: bf16
+      save_every: 500
+      max_step_saves_to_keep: 4
+      save_format: diffusers
+      push_to_hub: false
+    datasets:
+    - folder_path: /workspace/ai-toolkit/datasets/target_v4
+      mask_path: null
+      mask_min_value: 0.1
+      default_caption: ''
+      caption_ext: txt
+      caption_dropout_rate: 0.05
+      cache_latents_to_disk: false
+      is_reg: false
+      network_weight: 1
+      resolution:
+      - 1024
+      controls: []
+      shrink_video_to_frames: true
+      num_frames: 1
+      do_i2v: true
+      flip_x: false
+      flip_y: false
+      control_path_1: /workspace/ai-toolkit/datasets/control_v4
+      control_path_2: null
+      control_path_3: null
+    train:
+      batch_size: 1
+      bypass_guidance_embedding: false
+      steps: 3000
+      gradient_accumulation: 1
+      train_unet: true
+      train_text_encoder: false
+      gradient_checkpointing: true
+      noise_scheduler: flowmatch
+      optimizer: adamw8bit
+      timestep_type: weighted
+      content_or_style: balanced
+      optimizer_params:
+        weight_decay: 0.0001
+      unload_text_encoder: false
+      cache_text_embeddings: true
+      lr: 0.0001
+      ema_config:
+        use_ema: false
+        ema_decay: 0.99
+      skip_first_sample: false
+      force_first_sample: false
+      disable_sampling: false
+      dtype: bf16
+      diff_output_preservation: false
+      diff_output_preservation_multiplier: 1
+      diff_output_preservation_class: person
+      switch_boundary_every: 1
+      loss_type: mse
+    model:
+      name_or_path: Qwen/Qwen-Image-Edit-2509
+      quantize: true
+      qtype: uint3|ostris/accuracy_recovery_adapters/qwen_image_edit_2509_torchao_uint3.safetensors
+      quantize_te: true
+      qtype_te: qfloat8
+      arch: qwen_image_edit_plus
+      low_vram: true
+      model_kwargs:
+        match_target_res: false
+      layer_offloading: false
+      layer_offloading_text_encoder_percent: 1
+      layer_offloading_transformer_percent: 1
+    sample:
+      sampler: flowmatch
+      sample_every: 500
+      width: 1664
+      height: 928
+      samples:
+      - prompt: Replace the green lane detection lines with realistic road lane markings.
+          The final image must not contain green lane lines. Do not remove vehicles,
+          signs, or objects.
+        ctrl_img_1: /workspace/ai-toolkit/data/images/ea7fe87e-70cb-4651-9300-9e2b86210479.jpg
+      - prompt: Replace the green lane detection lines with realistic road lane markings.
+          The final image must not contain green lane lines. Do not remove vehicles,
+          signs, or objects.
+        ctrl_img_1: /workspace/ai-toolkit/data/images/dfa53a8d-5a1c-4829-b45b-b204c3ef4570.jpg
+      - prompt: Replace the green lane detection lines with realistic road lane markings.
+          The final image must not contain green lane lines. Do not remove vehicles,
+          signs, or objects.
+        ctrl_img_1: /workspace/ai-toolkit/data/images/78b595ed-813f-4b53-9e1b-dff5e76ea5cd.jpg
+      - prompt: Replace the green lane detection lines with realistic road lane markings.
+          The final image must not contain green lane lines. Do not remove vehicles,
+          signs, or objects.
+        ctrl_img_1: /workspace/ai-toolkit/data/images/97d54c0c-1341-414a-b2c1-bea182533390.jpg
+      neg: ''
+      seed: 42
+      walk_seed: true
+      guidance_scale: 4
+      sample_steps: 25
+      num_frames: 1
+      fps: 1
+meta:
+  name: qwen_5
+  version: '1.0'

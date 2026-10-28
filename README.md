@@ -301,14 +301,6 @@ The project was evaluated on the [CULane dataset](https://xingangpan.github.io/p
 - 62,532 training images
 - 9 test categories: normal, crowded, dazzle, no-line, shadow, arrow, cross, curve, night
 
-## Team
-
-- **Sai Akhilesh Vangala** - Pipeline architecture, evaluation metrics (LPIPS, SSIM, FID)
-- **Arunesh Mishra** - CLRerNet pipeline, Visibility Boost, Qwen Research
-- **Mrunmay Deshmukh** - Qwen fine-tuning, ComfyUI integration
-- **Shreya Muppidi** - LaMa exploration, fine-tuning research
-- **Prachi Dudhe** - Documentation, LaMa setup
-
 ## References
 
 1. Honda, H., & Uchida, Y. (2024). [CLRerNet: Improving Confidence of Lane Detection with LaneIoU](https://github.com/hirotomusiker/CLRerNet)
